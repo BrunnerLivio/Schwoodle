@@ -1,7 +1,8 @@
 {
-  "name": "M133-Gästebuch",
+  "name": "Schwoodle",
   "authors": [
-    "BrunnerLivio <livio.brunner@hotmail.com>"
+    "BrunnerLivio <livio.brunner@hotmail.com>",
+    "Lars Vognstrups"
   ],
   "description": "",
   "main": "",
@@ -15,5 +16,9 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "jquery": "^2.2.4",
+    "bootstrap": "^3.3.6"
+  }
 }
