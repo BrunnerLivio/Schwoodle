@@ -19,6 +19,9 @@ class Auth {
 	public static function GetUserId(){;
 		return self::$user[0];
 	}
+	public static function IsSchüler(){
+		return self::$Authentication->IsSchüler();
+	}
 	public static function Logout(){
 		self::$Authentication->Logout();
 	}

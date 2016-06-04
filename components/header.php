@@ -13,7 +13,7 @@
 	
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
-			<li <?php if(Title::GetSubtitle() == "Home") { ?> class="active"<?php } ?>><a href="<?php echo $base; ?>/home">Startseite <span class="sr-only">(current)</span></a></li>
+			<li <?php if(Title::GetSubtitle() == "Schüler - Home") { ?> class="active"<?php } ?>><a href="<?php echo $base; ?>/">Startseite <span class="sr-only">(current)</span></a></li>
 			<?php if(Auth::IsAuthenticated()){ ?>
 			<li><a href="<?php echo $base; ?>/logout">Ausloggen</a></li>
 			<?php
