@@ -15,7 +15,6 @@
 		<ul class="nav navbar-nav">
 			<li <?php if(Title::GetSubtitle() == "Home") { ?> class="active"<?php } ?>><a href="<?php echo $base; ?>/home">Startseite <span class="sr-only">(current)</span></a></li>
 			<?php if(Auth::IsAuthenticated()){ ?>
-			<li <?php if(Title::GetSubtitle() == "Admin Home") { ?> class="active" <?php } ?>><a href="<?php echo $base; ?>/admin/home">Admin</a></li>
 			<li><a href="<?php echo $base; ?>/logout">Ausloggen</a></li>
 			<?php
 			} else {
