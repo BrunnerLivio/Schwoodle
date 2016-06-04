@@ -13,6 +13,9 @@ foreach (glob("factories/*.php") as $filename)
     require $filename;
 }
 
+function create_array($num_elements) {
+    return array_fill(0, $num_elements, 0);
+}
 require 'views/_Shared/_ViewStart.php';
 
 Auth::Init();

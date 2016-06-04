@@ -2,25 +2,26 @@
     <div class="panel-body">
         <div class="col-md-6 col-sm-12">
             <h3 class="animated fadeInLeft"><?php echo Title::GetSubtitle(); ?></h3>
-            
+
         </div>
     </div>
 </div>
 
 <div class="col-md-12">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            Noten
+    <div class="panel">
+        <div class="panel-heading-white panel-heading">
+            <h4>Absenzen</h4>
         </div>
-        <!-- /.panel-heading -->
         <div class="panel-body">
-            <div id="noten"></div>
+            <div class="col-md-12">
+                <canvas class="line-chart"></canvas>
+            </div>
         </div>
     </div>
 </div>
 <div class="col-md-6">
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="panel">
+        <div class="panel-heading-white panel-heading">
             Persönliche Daten
         </div>
         <div class="panel-body">
@@ -43,8 +44,8 @@
     </div>
 </div>
 <div class="col-md-6">
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="panel">
+        <div class="panel-heading-white panel-heading">
             Noten
         </div>
         <div class="panel-body">
@@ -59,7 +60,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($model as $note) { ?>
+                        <?php foreach($model["noten"] as $note) { ?>
                         <tr>
                             <td>
                                 <?php echo $note["Bezeichnung"] ?>
@@ -82,13 +83,26 @@
     </div>
 </div>
 <script type="text/javascript">
-    Morris.Area({
-        element: 'noten',
-        data: <?php echo json_encode($model); ?>,
-            xkey: 'Erstellungsdatum',
-        ykeys: ['Wert'],
-        labels: ['Wert'],
-        ymax: 6,
-        resize: true
-    });
+    var lineChartData = {
+        labels: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "Oktober", "September", "November", "Dezember"],
+        datasets: [{
+            label: "My First dataset",
+            fillColor: "rgba(21,186,103,0.5)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: <?php echo json_encode($model["absenzenChartData"]); ?>
+        }]
+    };
+    window.onload = function() {
+        var ctx3 = $(".line-chart")[0].getContext("2d");
+        ctx3.canvas.height = 50;
+        window.myLine = new Chart(ctx3).Line(lineChartData, {
+            responsive: true,
+            showTooltips: true
+        });
+        
+    };
 </script>
