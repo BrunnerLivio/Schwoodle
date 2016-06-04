@@ -6,7 +6,7 @@ class Auth {
 	public static function Init(){
 		self::$Authentication = new Authentication();
 		if(isset($_SESSION["user"])){
-			self::$user = unserialize($_SESSION["user"]);
+			self::$user = self::$Authentication->GetUserFromSession();
 		}
 		
 	}
@@ -17,8 +17,8 @@ class Auth {
 	public static function IsAuthenticated(){
 		return self::$Authentication->IsAuthenticated();
 	}
-	public static function GetUserId(){;
-		return self::$user[0];
+	public static function GetUserId(){
+		return self::$user["Id"];
 	}
 	public static function GetSchülerId(){
 		if(self::$schülerId == null){
@@ -28,6 +28,9 @@ class Auth {
 	}
 	public static function Logout(){
 		self::$Authentication->Logout();
+	}
+	public static function GetUser(){
+		return self::$user;
 	}
 }
 ?>

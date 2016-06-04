@@ -6,10 +6,10 @@ class Authentication extends DBConnect{
 	}
 	
 	public function Authenticate($email, $password){
-		$result = mysqli_query($this->conn, "SELECT Id, Email, Passwort FROM person WHERE Email = '$email' AND Passwort = '$password'");
-		$user = mysqli_fetch_all ($result);
+		$result = mysqli_query($this->conn, "SELECT Id, Email, Name, Vorname, Passwort FROM person WHERE Email = '$email' AND Passwort = '$password'");
+		$user = mysqli_fetch_all ($result, MYSQL_ASSOC);
 		if(count($user) == 1){
-			$_SESSION["user"] = serialize($user[0]);
+			$_SESSION["user"] = json_encode($user[0]);
 			return  true;
 		}
 		else 
@@ -26,7 +26,7 @@ class Authentication extends DBConnect{
 	}
 	public function GetSchülerId(){
 		$user = $this->GetUserFromSession();
-		$userId = intval($user["0"]);
+		$userId = $user->Id;
 		$result = mysqli_query($this->conn, 'SELECT Id FROM schüler WHERE Person_Id = '.$userId);
 		$schüler = mysqli_fetch_all($result, MYSQLI_ASSOC);
 		if($result && count($schüler) > 0){
@@ -35,8 +35,8 @@ class Authentication extends DBConnect{
 			return false;
 		}
 	}
-	private function GetUserFromSession(){
-		return unserialize($_SESSION["user"]);
+	public function GetUserFromSession(){
+		return json_decode($_SESSION["user"]);
 	}
 }
 ?>
