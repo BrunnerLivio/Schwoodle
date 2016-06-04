@@ -5,8 +5,8 @@ class Authentication extends DBConnect{
 		parent::__construct();
 	}
 	
-	public function Authenticate($username, $password){
-		$result = mysqli_query($this->conn, "SELECT Id, Username, Password FROM user WHERE Username = '$username' AND Password = '$password'");
+	public function Authenticate($email, $password){
+		$result = mysqli_query($this->conn, "SELECT Id, Email, Passwort FROM Person WHERE Email = '$email' AND Passwort = '$password'");
 		$user = mysqli_fetch_all ($result);
 		if(count($user) == 1){
 			$_SESSION["user"] = serialize($user[0]);
