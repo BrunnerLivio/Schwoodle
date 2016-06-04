@@ -24,12 +24,13 @@ class Authentication extends DBConnect{
 	public function Logout(){
 		session_destroy();
 	}
-	public function IsSchüler(){
+	public function GetSchülerId(){
 		$user = $this->GetUserFromSession();
 		$userId = intval($user["0"]);
 		$result = mysqli_query($this->conn, 'SELECT Id FROM schüler WHERE Person_Id = '.$userId);
-		if($result){
-			return count(mysqli_fetch_all($result)) > 0;
+		$schüler = mysqli_fetch_all($result, MYSQLI_ASSOC);
+		if($result && count($schüler) > 0){
+			return intval($schüler[0]["Id"]);
 		} else {
 			return false;
 		}

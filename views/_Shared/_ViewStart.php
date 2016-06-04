@@ -23,6 +23,13 @@ class ViewStart {
 </head>
 
 <body>
+    <script src="<?php echo $base; ?>/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="<?php echo $base; ?>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="<?php echo $base; ?>/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="<?php echo $base; ?>/bower_components/raphael/raphael.min.js"></script>
+    <script src="<?php echo $base; ?>/bower_components/morrisjs/morris.min.js"></script>
+    <script src="<?php echo $base; ?>/bower_components/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
+    <script src="<?php echo $base; ?>/js/main.js"></script>
     <div class="container">
         <?php include 'components/header.php'; ?>
         <div class="content">
@@ -40,13 +47,7 @@ echo Title::GetSubtitle();
     </div>
 
 
-    <script src="<?php echo $base; ?>/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="<?php echo $base; ?>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="<?php echo $base; ?>/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-    <script src="<?php echo $base; ?>/bower_components/raphael/raphael.min.js"></script>
-    <script src="<?php echo $base; ?>/bower_components/morrisjs/morris.min.js"></script>
-    <script src="<?php echo $base; ?>/bower_components/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
-    <script src="<?php echo $base; ?>/js/main.js"></script>
+
 </body>
 
 </html>

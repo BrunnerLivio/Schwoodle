@@ -14,7 +14,7 @@ class LoginController extends Controller {
 		$this->router->map( 'POST', '/login', function() {	
 			
 			if(Auth::Authenticate($_POST["email"], $_POST["password"])){
-				if(Auth::IsSchüler()){
+				if(Auth::GetSchülerId()){
 					$this->redirect('schueler');
 				} else {
 					

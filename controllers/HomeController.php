@@ -6,7 +6,7 @@ class HomeController extends Controller {
 	public function Map(){
 		$this->router->map( 'GET', '/', function() {
 			if(Auth::IsAuthenticated()){
-				if(Auth::IsSchüler()){
+				if(Auth::GetSchülerId()){
 					$this->redirect('schueler');
 				} else {
 					

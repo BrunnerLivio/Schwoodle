@@ -2,6 +2,7 @@
 class Auth {
 	private static $Authentication;
 	private static $user;
+	private static $schülerId;
 	public static function Init(){
 		self::$Authentication = new Authentication();
 		if(isset($_SESSION["user"])){
@@ -19,8 +20,11 @@ class Auth {
 	public static function GetUserId(){;
 		return self::$user[0];
 	}
-	public static function IsSchüler(){
-		return self::$Authentication->IsSchüler();
+	public static function GetSchülerId(){
+		if(self::$schülerId == null){
+			self::$schülerId = self::$Authentication->GetSchülerId();
+		} 
+		return self::$schülerId;
 	}
 	public static function Logout(){
 		self::$Authentication->Logout();
