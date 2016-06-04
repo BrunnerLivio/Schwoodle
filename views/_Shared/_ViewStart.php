@@ -13,11 +13,11 @@ class ViewStart {
         <?php Title::Render(); ?>
     </title>
 
-    <link rel="stylesheet" href="<?php echo $base; ?>/css/main.css" />
     <link rel="stylesheet" href="<?php echo $base; ?>/bower_components/bootstrap/dist/css/bootstrap.css" />
     <link href="<?php echo $base; ?>/bower_components/morrisjs/morris.css" rel="stylesheet">
     <link href="<?php echo $base; ?>/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="<?php echo $base; ?>/vendor/miminium/asset/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo $base; ?>/css/main.css" />	
 </head>
 
 <body id="mimin" class="dashboard">

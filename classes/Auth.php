@@ -30,7 +30,7 @@ class Auth {
 		self::$Authentication->Logout();
 	}
 	public static function GetUser(){
-		return self::$user;
+		return self::$Authentication->GetUser();
 	}
 }
 ?>

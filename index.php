@@ -1,4 +1,5 @@
 <?php 
+require 'vendor/chromephp/ChromePhp.php';
 require 'classes/Controller.php';
 require 'classes/DBConnect.php';
 require 'classes/RESTItem.php';

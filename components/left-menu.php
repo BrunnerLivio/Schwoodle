@@ -1,4 +1,3 @@
-<!-- start:Left Menu -->
 <div id="left-menu">
     <div class="sub-left-menu scroll">
         <ul class="nav nav-list">
@@ -19,4 +18,3 @@
         </ul>
     </div>
 </div>
-<!-- end: Left Menu -->

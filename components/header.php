@@ -25,7 +25,7 @@
 
             <ul class="nav navbar-nav navbar-right user-nav">
                 <?php if (Auth::IsAuthenticated()) { ?>
-                	<li class="user-name"><span><?php echo Auth::GetUser()->Vorname; ?> <?php echo Auth::GetUser()->Name; ?></span></li>
+                	<li class="user-name"><span><?php echo Auth::GetUser()["Vorname"]; ?> <?php echo Auth::GetUser()["Name"]; ?></span></li>
                 <?php } ?>
                 <li class="dropdown avatar-dropdown">
                     <img src="vendor/miminium/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" />

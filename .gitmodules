@@ -1,3 +1,6 @@
 [submodule "vendor/miminium"]
 	path = vendor/miminium
 	url = https://github.com/akivaron/miminium.git
+[submodule "vendor/chromephp"]
+	path = vendor/chromephp
+	url = https://github.com/ccampbell/chromephp.git

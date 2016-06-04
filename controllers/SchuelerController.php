@@ -19,6 +19,15 @@ class SchuelerController extends Controller {
             }
             ViewStart::render('/views/Schueler/Index.php', 'Schüler - Home', ["noten" => $noten, "absenzenChartData" => $absenzenChartData]);
         });
+		$this->router->map('POST', '/schueler/updatedata', function() {
+			$personFactory = new PersonFactory();
+			$personFactory->UpdateWhere("Id = ".Auth::GetUser()["Id"], [
+				"name" => $_POST["name"],
+				"vorname"=> $_POST["vorname"],
+				"email"=> $_POST["email"]
+			]);
+			$this->redirect('schueler');
+		});
     }
 }
 ?>
