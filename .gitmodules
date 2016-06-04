@@ -1,0 +1,3 @@
+[submodule "vendor/miminium"]
+	path = vendor/miminium
+	url = https://github.com/akivaron/miminium.git
