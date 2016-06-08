@@ -16,8 +16,8 @@ class LoginController extends Controller {
 			if(Auth::Authenticate($_POST["email"], $_POST["password"])){
 				if(Auth::GetSchülerId()){
 					$this->redirect('schueler');
-				} else {
-					
+				} else if(Auth::GetLehrkraftId()) {
+					$this->redirect('lehrkraft');
 				}
 			} else {
 				$this->redirect('login');
