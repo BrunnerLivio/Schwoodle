@@ -27,5 +27,17 @@ class SchülerFactory extends RESTItem {
         } while (mysqli_next_result($this->conn));
         return $absenzen;
     }
+	public function LoadAll() {
+		$res = mysqli_multi_query($this->conn, "CALL GetSchüler()");
+        echo mysqli_error($this->conn);
+        do {
+            if ($result = mysqli_store_result($this->conn)) {
+
+                $schüler = mysqli_fetch_all($result, MYSQL_ASSOC);
+                $result->close();
+            }
+        } while (mysqli_next_result($this->conn));
+        return $schüler;
+	}
 }
 ?>
