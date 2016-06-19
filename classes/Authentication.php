@@ -33,6 +33,17 @@ class Authentication extends DBConnect {
             return false;
         }
     }
+    public function GetLehrkraftId() {
+        $user = $this->GetUserFromSession();
+        $userId = $user->Id;
+        $result = mysqli_query($this->conn, 'SELECT Id FROM lehrkraft WHERE Person_Id = '.$userId);
+        $lehrkraft = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        if ($result && count($lehrkraft) > 0) {
+            return intval($lehrkraft[0]["Id"]);
+        } else {
+            return false;
+        }
+    }
     public function GetUserFromSession() {
         return json_decode($_SESSION["user"]);
     }

@@ -8,8 +8,8 @@ class HomeController extends Controller {
 			if(Auth::IsAuthenticated()){
 				if(Auth::GetSchülerId()){
 					$this->redirect('schueler');
-				} else {
-					
+				} else if(Auth::GetLehrkraftId()) {
+					$this->redirect('lehrkraft');
 				}
 			} else {
 				$this->redirect('login');

@@ -11,7 +11,7 @@ class SchuelerController extends Controller {
             $absenzen = $schülerFactory->GetAbsenzenFromThisYearBySchülerId(Auth::GetSchülerId());
             $absenzenChartData = create_array(12);
             foreach($absenzen as $absenz) {
-                $month = intval(date('m', strtotime($absenz["ErstellungsDatum"]))) - 1;
+                $month = intval(date('m', strtotime($absenz["Erstellungsdatum"]))) - 1;
                 if ($absenzenChartData[$month] == null) {
                     $absenzenChartData[$month] = 0;
                 }
