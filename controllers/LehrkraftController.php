@@ -10,6 +10,17 @@ class LehrkraftController extends Controller {
             $model = ["fächer" => $FachFactory->LoadAll(), "schüler" => $SchülerFactory->LoadAll()];
             ViewStart::render('/views/Lehrkraft/Index.php', 'Lehrkraft - Home', $model);
         });
+        $this->router->map('POST', '/lehrkraft/insertabsenz', function() {
+            $absenzFactory = new AbsenzFactory();
+            $lektionen = intval($_POST["lektionen"]);
+            for ($lektion = 0; $lektion < $lektionen; $lektion++) {
+                $absenzFactory->InsertAbsenz($_POST["schüler"], Auth::GetLehrkraftId(), $_POST["fach"],$_POST["datum"]);
+            }
+            // Nachricht
+            TempData::Set(["Message" => "Die Absenzen wurden erfolgreich im System eingetragen", "Type" => 1]);
+            
+            //$this->redirect('lehrkraft');
+        });
     }
 }
 ?>

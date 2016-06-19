@@ -7,6 +7,7 @@ require 'classes/Authentication.php';
 require 'classes/Auth.php';
 require 'classes/Title.php';
 require 'classes/AppSettings.php';
+require 'classes/TempData.php';
 AppSettings::init();
 
 foreach (glob("factories/*.php") as $filename)

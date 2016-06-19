@@ -16,7 +16,7 @@ class SchülerFactory extends RESTItem {
         return $noten;
     }
     public function GetAbsenzenFromThisYearBySchülerId($schülerId) {
-        $res = mysqli_multi_query($this->conn, "CALL GetNotenBySchülerId(".$schülerId.")");
+        $res = mysqli_multi_query($this->conn, "CALL GetAbsenzenFromThisYearBySchülerId(".$schülerId.")");
         echo mysqli_error($this->conn);
         do {
             if ($result = mysqli_store_result($this->conn)) {

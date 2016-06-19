@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertAbsenz`(IN schuelerId INT(4), IN lehrerId INT(4), IN fachId INT(4))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertAbsenz`(IN schuelerId INT(4), IN lehrerId INT(4), IN fachId INT(4), IN datum timestamp)
 BEGIN
 
     Set @LehrerPersonId = (Select Person_Id From lehrkraft Where Id = lehrerId);
@@ -10,7 +10,7 @@ BEGIN
     
     Set @MetadatenIdMAX = (SELECT max(id) FROM metadaten);
     
-    INSERT INTO absenz (Fach_Id, Metadaten_Id, SchülerId)
+    INSERT INTO absenz (Fach_Id, Metadaten_Id, Schüler_Id)
     Values (fachId, @MetadatenIdMAX, schuelerId);
     
 END

@@ -17,7 +17,7 @@ class ViewStart {
     <link href="<?php echo $base; ?>/bower_components/morrisjs/morris.css" rel="stylesheet">
     <link href="<?php echo $base; ?>/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="<?php echo $base; ?>/vendor/miminium/asset/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?php echo $base; ?>/css/main.css" />	
+    <link rel="stylesheet" href="<?php echo $base; ?>/css/main.css" />
 </head>
 
 <body id="mimin" class="dashboard">
@@ -37,10 +37,30 @@ class ViewStart {
     <div class="container-fluid mimin-wrapper">
 
         <?php if (Auth::IsAuthenticated()) {
-			include 'components/left-menu.php';
-		} ?>
+    include 'components/left-menu.php';
+} ?>
         <div id="content">
-            <?php require($view); ?>
+            <?php if (Title::GetSubtitle() != "Login") {
+    ?>
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="col-md-6 col-sm-12">
+                        <h3 class="animated fadeInLeft"><?php echo Title::GetSubtitle(); ?></h3>
+                    </div>
+                </div>
+            </div>
+            <?php 
+}
+?> <?php 
+if (TempData::Get() != null && TempData::Get()->Type == 1) {
+    ?>
+            <div class="alert alert-success">
+                <?php echo TempData::Get()->Message; ?>
+            </div>
+
+            <?php 
+}
+?> <?php require($view); ?>
         </div>
     </div>
 

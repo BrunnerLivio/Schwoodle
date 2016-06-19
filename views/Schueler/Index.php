@@ -1,12 +1,3 @@
-<div class="panel">
-    <div class="panel-body">
-        <div class="col-md-6 col-sm-12">
-            <h3 class="animated fadeInLeft"><?php echo Title::GetSubtitle(); ?></h3>
-
-        </div>
-    </div>
-</div>
-
 <div class="col-md-12">
     <div class="panel">
         <div class="panel-heading-white panel-heading">
