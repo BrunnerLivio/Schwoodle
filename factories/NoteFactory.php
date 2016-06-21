@@ -5,12 +5,12 @@ class NoteFactory extends RESTItem {
     }
     public function InsertNote($wert, $wertung, $erreichtePunkte, $maximalPunkte, $schuelerId, $lehrkraftId, $fachId) {
         echo "CALL InsertNote(".$wert.",".$wertung.",".$erreichtePunkte.",".$maximalPunkte.",". $schuelerId .",". $fachId .")";
-        $res = mysqli_multi_query($this->conn, "CALL InsertNote(".$wert.",".$wertung.",".$erreichtePunkte.",".$maximalPunkte.",". $schuelerId .",".$lehrkraftId.",". $fachId .")");
+        $res = odbc_multi_query($this->conn, "CALL InsertNote(".$wert.",".$wertung.",".$erreichtePunkte.",".$maximalPunkte.",". $schuelerId .",".$lehrkraftId.",". $fachId .")");
         do {
-            if ($result = mysqli_store_result($this->conn)) {
+            if ($result = odbc_store_result($this->conn)) {
                 $result->close();
             }
-        } while (mysqli_next_result($this->conn));
+        } while (odbc_next_result($this->conn));
     }
 }
 ?>

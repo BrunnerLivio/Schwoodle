@@ -6,8 +6,8 @@ class Authentication extends DBConnect {
     }
 
     public function Authenticate($email, $password) {
-        $result = mysqli_query($this->conn, "SELECT Id, Email, Name, Vorname, Passwort FROM person WHERE Email = '$email' AND Passwort = '$password'");
-        $user = mysqli_fetch_all($result, MYSQL_ASSOC);
+        $result = odbc_exec($this->conn, "SELECT Id, Email, Name, Vorname, Passwort FROM person WHERE Email = '$email' AND Passwort = '$password'");
+        $user = odbc_fecht_all($result, MYSQL_ASSOC);
         if (count($user) == 1) {
             $_SESSION["user"] = json_encode($user[0]);
             return true;
@@ -25,8 +25,8 @@ class Authentication extends DBConnect {
     public function GetSchülerId() {
         $user = $this->GetUserFromSession();
         $userId = $user->Id;
-        $result = mysqli_query($this->conn, 'SELECT Id FROM schüler WHERE Person_Id = '.$userId);
-        $schüler = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        $result = odbc_exec($this->conn, 'SELECT Id FROM schüler WHERE Person_Id = '.$userId);
+        $schüler = odbc_fecht_all($result, MYSQLI_ASSOC);
         if ($result && count($schüler) > 0) {
             return intval($schüler[0]["Id"]);
         } else {
@@ -36,8 +36,8 @@ class Authentication extends DBConnect {
     public function GetLehrkraftId() {
         $user = $this->GetUserFromSession();
         $userId = $user->Id;
-        $result = mysqli_query($this->conn, 'SELECT Id FROM lehrkraft WHERE Person_Id = '.$userId);
-        $lehrkraft = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        $result = odbc_exec($this->conn, 'SELECT Id FROM lehrkraft WHERE Person_Id = '.$userId);
+        $lehrkraft = odbc_fecht_all($result, MYSQLI_ASSOC);
         if ($result && count($lehrkraft) > 0) {
             return intval($lehrkraft[0]["Id"]);
         } else {
@@ -48,8 +48,8 @@ class Authentication extends DBConnect {
         return json_decode($_SESSION["user"]);
     }
     public function GetUser() {
-        $result = mysqli_query($this->conn, "SELECT Id, Email, Name, Vorname, Passwort FROM person WHERE Id = ".$this->GetUserFromSession()->Id);
-        $user = mysqli_fetch_all($result, MYSQL_ASSOC);
+        $result = odbc_exec($this->conn, "SELECT Id, Email, Name, Vorname, Passwort FROM person WHERE Id = ".$this->GetUserFromSession()->Id);
+        $user = odbc_fecht_all($result, MYSQL_ASSOC);
         return $user[0];
     }
 

@@ -4,39 +4,39 @@ class SchülerFactory extends RESTItem {
         parent::__construct("schüler");
     }
     public function GetNotenBySchülerId($schülerId) {
-        $res = mysqli_multi_query($this->conn, "CALL GetNotenBySchülerId(".$schülerId.")");
-        echo mysqli_error($this->conn);
+        $res = odbc_multi_query($this->conn, "CALL GetNotenBySchülerId(".$schülerId.")");
+        echo odbc_error($this->conn);
         do {
-            if ($result = mysqli_store_result($this->conn)) {
+            if ($result = odbc_store_result($this->conn)) {
 
-                $noten = mysqli_fetch_all($result, MYSQL_ASSOC);
+                $noten = odbc_fetch_all($result, MYSQL_ASSOC);
                 $result->close();
             }
-        } while (mysqli_next_result($this->conn));
+        } while (odbc_next_result($this->conn));
         return $noten;
     }
     public function GetAbsenzenFromThisYearBySchülerId($schülerId) {
-        $res = mysqli_multi_query($this->conn, "CALL GetAbsenzenFromThisYearBySchülerId(".$schülerId.")");
-        echo mysqli_error($this->conn);
+        $res = odbc_multi_query($this->conn, "CALL GetAbsenzenFromThisYearBySchülerId(".$schülerId.")");
+        echo odbc_error($this->conn);
         do {
-            if ($result = mysqli_store_result($this->conn)) {
+            if ($result = odbc_store_result($this->conn)) {
 
-                $absenzen = mysqli_fetch_all($result, MYSQL_ASSOC);
+                $absenzen = odbc_fetch_all($result, MYSQL_ASSOC);
                 $result->close();
             }
-        } while (mysqli_next_result($this->conn));
+        } while (odbc_next_result($this->conn));
         return $absenzen;
     }
 	public function LoadAll() {
-		$res = mysqli_multi_query($this->conn, "CALL GetSchüler()");
-        echo mysqli_error($this->conn);
+		$res = odbc_multi_query($this->conn, "CALL GetSchüler()");
+        echo odbc_error($this->conn);
         do {
-            if ($result = mysqli_store_result($this->conn)) {
+            if ($result = odbc_store_result($this->conn)) {
 
-                $schüler = mysqli_fetch_all($result, MYSQL_ASSOC);
+                $schüler = odbc_fetch_all($result, MYSQL_ASSOC);
                 $result->close();
             }
-        } while (mysqli_next_result($this->conn));
+        } while (odbc_next_result($this->conn));
         return $schüler;
 	}
 }
