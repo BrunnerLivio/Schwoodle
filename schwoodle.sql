@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2016 at 09:01 PM
+-- Generation Time: Jun 28, 2016 at 09:31 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -24,6 +24,7 @@ DELIMITER $$
 --
 -- Procedures
 --
+DROP PROCEDURE IF EXISTS `GetAbsenzenFromThisYearBySchülerId`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAbsenzenFromThisYearBySchülerId`(IN schuelerId INT(4))
 BEGIN
 SELECT fach.Bezeichnung, metadaten.ErstellungsDatum FROM absenz
@@ -35,12 +36,14 @@ SELECT fach.Bezeichnung, metadaten.ErstellungsDatum FROM absenz
 		AND YEAR(metadaten.ErstellungsDatum) = YEAR(CURDATE());
 END$$
 
+DROP PROCEDURE IF EXISTS `GetFaecherByLehrkraftId`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GetFaecherByLehrkraftId`(IN LehrkraftId INT(4))
 BEGIN
 	SELECT Bezeichnung FROM fach
     WHERE Id = (SELECT Fach_Id FROM lehrkraft_fach WHERE Lehrkraft_Id = LehrkraftId);
 END$$
 
+DROP PROCEDURE IF EXISTS `GetNotenBySchülerId`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GetNotenBySchülerId`(IN schuelerId INT(4))
 BEGIN
 SELECT note.Id, note.Wert, note.ErreichtePunkte, note.MaximalPunkte, fach.Bezeichnung, metadaten.Erstellungsdatum
@@ -52,6 +55,7 @@ SELECT note.Id, note.Wert, note.ErreichtePunkte, note.MaximalPunkte, fach.Bezeic
 		WHERE Schüler_Id = schuelerId;
 END$$
 
+DROP PROCEDURE IF EXISTS `GetSchüler`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GetSchüler`()
 BEGIN
 	SELECT person.Name, person.Vorname, schüler.Id 
@@ -60,6 +64,7 @@ BEGIN
     ON schüler.Person_Id = person.Id;
 END$$
 
+DROP PROCEDURE IF EXISTS `InsertAbsenz`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertAbsenz`(IN schuelerId INT(4), IN lehrerId INT(4), IN fachId INT(4), IN datum timestamp)
 BEGIN
 
@@ -77,6 +82,7 @@ BEGIN
     
 END$$
 
+DROP PROCEDURE IF EXISTS `InsertNote`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertNote`(IN wert INT(4), IN wertung INT(4), IN erreichtePunkte INT(4), IN maximalPunkte INT(4), IN schuelerId INT(4), IN lehrkraftId INT(4), IN fachId INT(4))
 BEGIN
 	Set @LehrerPersonId = (Select Person_Id From lehrkraft Where Id = lehrkraftId);
@@ -100,6 +106,7 @@ DELIMITER ;
 -- Table structure for table `absenz`
 --
 
+DROP TABLE IF EXISTS `absenz`;
 CREATE TABLE IF NOT EXISTS `absenz` (
 `Id` int(11) NOT NULL,
   `Fach_Id` int(11) NOT NULL,
@@ -107,6 +114,11 @@ CREATE TABLE IF NOT EXISTS `absenz` (
   `Schüler_Id` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `absenz`
+--
+
+TRUNCATE TABLE `absenz`;
 --
 -- Dumping data for table `absenz`
 --
@@ -187,11 +199,17 @@ INSERT INTO `absenz` (`Id`, `Fach_Id`, `Metadaten_Id`, `Schüler_Id`) VALUES
 -- Table structure for table `fach`
 --
 
+DROP TABLE IF EXISTS `fach`;
 CREATE TABLE IF NOT EXISTS `fach` (
 `Id` int(11) NOT NULL,
   `Bezeichnung` varchar(150) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `fach`
+--
+
+TRUNCATE TABLE `fach`;
 --
 -- Dumping data for table `fach`
 --
@@ -207,29 +225,42 @@ INSERT INTO `fach` (`Id`, `Bezeichnung`) VALUES
 -- Table structure for table `klasse`
 --
 
+DROP TABLE IF EXISTS `klasse`;
 CREATE TABLE IF NOT EXISTS `klasse` (
 `Id` int(11) NOT NULL,
   `Bezeichnung` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `klasse`
+--
+
+TRUNCATE TABLE `klasse`;
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `klasse_fach`
 --
 
+DROP TABLE IF EXISTS `klasse_fach`;
 CREATE TABLE IF NOT EXISTS `klasse_fach` (
   `Klasse_Id` int(11) NOT NULL,
 `Id` int(11) NOT NULL,
   `Fach_Id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `klasse_fach`
+--
+
+TRUNCATE TABLE `klasse_fach`;
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `lehrkraft`
 --
 
+DROP TABLE IF EXISTS `lehrkraft`;
 CREATE TABLE IF NOT EXISTS `lehrkraft` (
 `Id` int(11) NOT NULL,
   `Einstellungsdatum` datetime NOT NULL,
@@ -237,6 +268,11 @@ CREATE TABLE IF NOT EXISTS `lehrkraft` (
   `Person_Id` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `lehrkraft`
+--
+
+TRUNCATE TABLE `lehrkraft`;
 --
 -- Dumping data for table `lehrkraft`
 --
@@ -251,12 +287,18 @@ INSERT INTO `lehrkraft` (`Id`, `Einstellungsdatum`, `Entlassungsdatum`, `Person_
 -- Table structure for table `lehrkraft_fach`
 --
 
+DROP TABLE IF EXISTS `lehrkraft_fach`;
 CREATE TABLE IF NOT EXISTS `lehrkraft_fach` (
   `Lehrkraft_Id` int(11) NOT NULL,
 `Id` int(11) NOT NULL,
   `Fach_Id` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `lehrkraft_fach`
+--
+
+TRUNCATE TABLE `lehrkraft_fach`;
 --
 -- Dumping data for table `lehrkraft_fach`
 --
@@ -270,12 +312,18 @@ INSERT INTO `lehrkraft_fach` (`Lehrkraft_Id`, `Id`, `Fach_Id`) VALUES
 -- Table structure for table `metadaten`
 --
 
+DROP TABLE IF EXISTS `metadaten`;
 CREATE TABLE IF NOT EXISTS `metadaten` (
 `Id` int(11) NOT NULL,
   `Erstellungsdatum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `ErstellerEmail` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `metadaten`
+--
+
+TRUNCATE TABLE `metadaten`;
 --
 -- Dumping data for table `metadaten`
 --
@@ -372,6 +420,7 @@ INSERT INTO `metadaten` (`Id`, `Erstellungsdatum`, `ErstellerEmail`) VALUES
 -- Table structure for table `note`
 --
 
+DROP TABLE IF EXISTS `note`;
 CREATE TABLE IF NOT EXISTS `note` (
 `Id` int(11) NOT NULL,
   `Wert` double DEFAULT NULL,
@@ -383,6 +432,11 @@ CREATE TABLE IF NOT EXISTS `note` (
   `Fach_Id` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `note`
+--
+
+TRUNCATE TABLE `note`;
 --
 -- Dumping data for table `note`
 --
@@ -405,6 +459,7 @@ INSERT INTO `note` (`Id`, `Wert`, `Wertung`, `ErreichtePunkte`, `MaximalPunkte`,
 -- Table structure for table `person`
 --
 
+DROP TABLE IF EXISTS `person`;
 CREATE TABLE IF NOT EXISTS `person` (
 `Id` int(11) NOT NULL,
   `Name` varchar(45) NOT NULL,
@@ -414,6 +469,11 @@ CREATE TABLE IF NOT EXISTS `person` (
   `Email` varchar(100) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `person`
+--
+
+TRUNCATE TABLE `person`;
 --
 -- Dumping data for table `person`
 --
@@ -430,6 +490,7 @@ INSERT INTO `person` (`Id`, `Name`, `Vorname`, `Geburtstdatum`, `Passwort`, `Ema
 -- Table structure for table `prüfung`
 --
 
+DROP TABLE IF EXISTS `prüfung`;
 CREATE TABLE IF NOT EXISTS `prüfung` (
 `Id` int(11) NOT NULL,
   `Durchführungsdatum` datetime DEFAULT NULL,
@@ -439,12 +500,18 @@ CREATE TABLE IF NOT EXISTS `prüfung` (
   `fach_Id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `prüfung`
+--
+
+TRUNCATE TABLE `prüfung`;
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `schüler`
 --
 
+DROP TABLE IF EXISTS `schüler`;
 CREATE TABLE IF NOT EXISTS `schüler` (
 `Id` int(11) NOT NULL,
   `Schulbeginn` datetime NOT NULL,
@@ -452,6 +519,11 @@ CREATE TABLE IF NOT EXISTS `schüler` (
   `Person_Id` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `schüler`
+--
+
+TRUNCATE TABLE `schüler`;
 --
 -- Dumping data for table `schüler`
 --
@@ -466,12 +538,18 @@ INSERT INTO `schüler` (`Id`, `Schulbeginn`, `Schulende`, `Person_Id`) VALUES
 -- Table structure for table `schüler_klasse`
 --
 
+DROP TABLE IF EXISTS `schüler_klasse`;
 CREATE TABLE IF NOT EXISTS `schüler_klasse` (
   `Schüler_Id` int(11) NOT NULL,
   `Klasse_Id` int(11) NOT NULL,
 `Id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Truncate table before insert `schüler_klasse`
+--
+
+TRUNCATE TABLE `schüler_klasse`;
 --
 -- Indexes for dumped tables
 --
