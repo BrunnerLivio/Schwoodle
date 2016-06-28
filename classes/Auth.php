@@ -18,6 +18,9 @@ class Auth {
 	public static function IsAuthenticated(){
 		return self::$Authentication->IsAuthenticated();
 	}
+	public static function GetUserEmail(){
+		return self::$user->Email;
+	}
 	public static function GetUserId(){
 		return self::$user["Id"];
 	}
