@@ -9,6 +9,6 @@ and the focus of the project is the Application Layers and the SQL Transactions.
 * Livio Brunner
 
 # Screenshots
-![Login](https://github.com/BrunnerLivio/Schwoodle/tree/master/screenshots/Selection_001.png)
-![Schüler Dashboard](https://github.com/BrunnerLivio/Schwoodle/tree/master/screenshots/Selection_002.png)
-![Lehrkraft Dashboard](https://github.com/BrunnerLivio/Schwoodle/tree/master/screenshots/Selection_003.png)
+![Login](https://raw.githubusercontent.com/BrunnerLivio/Schwoodle/master/screenshots/Selection_001.png)
+![Schüler Dashboard](https://raw.githubusercontent.com/BrunnerLivio/Schwoodle/master/screenshots/Selection_002.png)
+![Lehrkraft Dashboard](https://raw.githubusercontent.com/BrunnerLivio/Schwoodle/master/screenshots/Selection_003.png)
