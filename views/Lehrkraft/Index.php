@@ -4,3 +4,6 @@
 <div class="col-md-6">
     <?php include 'components/note-form.php'; ?>
 </div>
+<div class="col-md-6">
+    <?php include 'components/persoenlichedaten-form.php'; ?>
+</div>
