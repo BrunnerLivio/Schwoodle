@@ -8,7 +8,7 @@ class LoginController extends Controller {
 			if(Auth::IsAuthenticated()){
 				$this->redirect('');
 			} else {
-				ViewStart::render('/views/Login/Index.php', 'Login');
+				ViewStart::render('views/Login/Index.php', 'Login');
 			}
 		});
 		$this->router->map( 'POST', '/login', function() {	

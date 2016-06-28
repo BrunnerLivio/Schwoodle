@@ -17,7 +17,7 @@ class SchuelerController extends Controller {
                 }
                 $absenzenChartData[$month]++;
             }
-            ViewStart::render('/views/Schueler/Index.php', 'Schüler - Home', ["noten" => $noten, "absenzenChartData" => $absenzenChartData]);
+            ViewStart::render('views/Schueler/Index.php', 'Schüler - Home', ["noten" => $noten, "absenzenChartData" => $absenzenChartData]);
         });
 		$this->router->map('POST', '/schueler/updatedata', function() {
 			$personFactory = new PersonFactory();

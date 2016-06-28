@@ -8,7 +8,7 @@ class LehrkraftController extends Controller {
             $FachFactory = new FachFactory();
             $SchülerFactory = new SchülerFactory();
             $model = ["fächer" => $FachFactory->LoadAll(), "schüler" => $SchülerFactory->LoadAll()];
-            ViewStart::render('/views/Lehrkraft/Index.php', 'Lehrkraft - Home', $model);
+            ViewStart::render('views/Lehrkraft/Index.php', 'Lehrkraft - Home', $model);
         });
 
         $this->router->map('POST', '/lehrkraft/insertabsenz', function() {
